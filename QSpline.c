@@ -6,7 +6,7 @@
 
 
 
-void cubic_spline_coefficients(double x[/*Len*/], double y[/*Len*/], struct coefficients *coeff, int Len){
+void cubic_spline_coefficients(double x[/*Len*/], double y[/*Len*/], struct SplineCoeff *coeff, int Len){
     int n = Len - 1;
     double steps[n];
     double alpha;
@@ -48,11 +48,11 @@ double spline_interpolation(double x[/*Len*/], double y[/*Len*/], double x_up[/*
                           double y_up[/*(Len - 1) * upsample_ratio + 1*/], int Len, int upsample_ratio)
 {
     
-    struct coefficients *coeff;
+    struct SplineCoeff *coeff;
     double delta;
     double max = -1e10, max_x = 0;
     int count = 0;
-    coeff = malloc(sizeof(struct coefficients) + 1);
+    coeff = malloc(sizeof(struct SplineCoeff) + 1);
     coeff->a = malloc(sizeof(double) * (Len - 1) + 1);
     coeff->b = malloc(sizeof(double) * (Len - 1) + 1);
     coeff->c = malloc(sizeof(double) * (Len - 1) + 1);
